@@ -132,18 +132,18 @@ public class TimeTextView extends TextView {
 	}
 
 	@Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-        	requestFocusFromTouch();
-            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(this,0);
-            if (currentPosition == POSITION_NONE) {
-        		currentPosition = 0;
-        		updateText();
-            }
-        }
-        return true;
-    }	
+	public boolean onTouchEvent(MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			requestFocusFromTouch();
+			InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.showSoftInput(this,0);
+			if (currentPosition == POSITION_NONE) {
+				currentPosition = 0;
+				updateText();
+			}
+		}
+		return true;
+	}	
 	
 	private boolean onKeyEvent(int keyCode, KeyEvent event) {
 		if (event != null && event.getAction() != KeyEvent.ACTION_DOWN)
@@ -165,16 +165,16 @@ public class TimeTextView extends TextView {
 		
 		if (keyCode == KeyEvent.KEYCODE_ENTER) {
 			View v = focusSearch(FOCUS_DOWN);
-            boolean next = v!=null;
-            if (next) {
-                next = v.requestFocus(FOCUS_DOWN);
-            }	      
-            if (!next) {
-    			hideKeyboard();
-    	        currentPosition = POSITION_NONE;
-    	        updateText();
-            }
-            return true;
+			boolean next = v!=null;
+			if (next) {
+				next = v.requestFocus(FOCUS_DOWN);
+			}	      
+			if (!next) {
+				hideKeyboard();
+				currentPosition = POSITION_NONE;
+				updateText();
+			}
+			return true;
 		}		
 		
 		char c = (char) event.getUnicodeChar();  
@@ -199,8 +199,9 @@ public class TimeTextView extends TextView {
 			}
 			
 			if (valid) {
-				if (currentPosition == 0 && n == 2 && digits[1] > 3) // clip to 23 hours max
+				if (currentPosition == 0 && n == 2 && digits[1] > 3) { // clip to 23 hours max
 					digits[1] = 3;
+				}
 				
 				digits[currentPosition] = n;
 	    		currentPosition = currentPosition < 3 ? currentPosition+1 : POSITION_NONE;	// if it is the last digit, hide cursor
@@ -208,14 +209,14 @@ public class TimeTextView extends TextView {
 			}
 	
 			return true;
-	    }
+		}
 		
 		return false;
 	}
 	
 	private void hideKeyboard() {
 		InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getWindowToken(), 0);        
+		imm.hideSoftInputFromWindow(getWindowToken(), 0);        
 	}
 	
 
@@ -245,23 +246,23 @@ public class TimeTextView extends TextView {
 			@Override
 			public boolean performEditorAction(int actionCode) {
 				if (actionCode == EditorInfo.IME_ACTION_DONE) {
-	            	hideKeyboard();
-	    	        currentPosition = POSITION_NONE;
-	    	        updateText();
+					hideKeyboard();
+					currentPosition = POSITION_NONE;
+					updateText();
 				} else if (actionCode == EditorInfo.IME_ACTION_NEXT){
 					View v = focusSearch(FOCUS_DOWN);
-		            if (v!=null) {
-		                v.requestFocus(FOCUS_DOWN);
-		            }	   
+					if (v!=null) {
+						v.requestFocus(FOCUS_DOWN);
+					}
 				}
 				return true;
 			}
 
 			@Override
-	    	public boolean deleteSurroundingText(int beforeLength, int afterLength) {
-	    		 onKeyEvent(KeyEvent.KEYCODE_DEL, null);	
-	    		 return true;
-	    	}
+			public boolean deleteSurroundingText(int beforeLength, int afterLength) {
+				onKeyEvent(KeyEvent.KEYCODE_DEL, null);	
+				return true;
+			}
 						
 			@Override
 			public boolean sendKeyEvent(KeyEvent event) {
