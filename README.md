@@ -1,4 +1,4 @@
-TimeTextView
+TimeEditText
 ==============
 
 ![Screenshot](screenshot.png)
