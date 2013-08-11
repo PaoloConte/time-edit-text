@@ -47,7 +47,7 @@ import android.widget.TextView;
  * - Space key moves the cursor forward.
  * 
  */
-public class TimeTextView extends TextView {
+public class TimeEditText extends TextView {
 
 	private static final int POSITION_NONE = -1;
 	
@@ -55,15 +55,15 @@ public class TimeTextView extends TextView {
 	private int currentPosition = POSITION_NONE;
 	private int mImeOptions;
 	
-	public TimeTextView(Context context) {
+	public TimeEditText(Context context) {
 		this(context, null, 0);
 	}
 	
-	public TimeTextView(Context context, AttributeSet attrs) {
+	public TimeEditText(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 	
-	public TimeTextView(Context context, AttributeSet attrs, int defStyle) {
+	public TimeEditText(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		setFocusableInTouchMode(true);
 
