@@ -204,8 +204,8 @@ public class TimeTextView extends TextView {
 				}
 				
 				digits[currentPosition] = n;
-	    		currentPosition = currentPosition < 3 ? currentPosition+1 : POSITION_NONE;	// if it is the last digit, hide cursor
-	    		updateText();
+				currentPosition = currentPosition < 3 ? currentPosition+1 : POSITION_NONE;	// if it is the last digit, hide cursor
+				updateText();
 			}
 	
 			return true;
